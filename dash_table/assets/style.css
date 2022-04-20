@@ -1,0 +1,80 @@
+/*
+.customdatatable-container {
+    width: 80%;
+    margin: auto;
+    background-color: lightgray;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(20, auto);
+    transition: all 1s;
+}
+.side-bar {
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    align-content: start;
+    background-color: #aaaaaaaa;
+    transition: all 1s;
+}
+.side-bar-open {
+    z-index: 1;
+    grid-column: 1;
+    grid-column-end: 11;
+    grid-row: 1;
+    display: grid;
+    align-content: start;
+    background-color: #aaaaaaaa;
+    transition: grid-column-end 1s;
+}
+.side-bar .button {
+    width: 50px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.side-bar-open .button {
+    width: 50px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: 2px;
+}
+
+.table-container {
+    grid-column: 2;
+    grid-column-end: 21;
+    grid-row: 1;
+}
+*/
+.customdatatable-container {
+    width: 80%;
+    margin: auto;
+    background-color: lightgray;
+    border-radius: 10px;
+    display: flex;
+    transition: all 1s;
+}
+.side-bar {
+    z-index: 1;
+    width: 52px;
+    display: grid;
+    align-content: start;
+    background-color: #aaaaaaaa;
+    transition: all 1s;
+}
+.side-bar.open {
+    width: 50%;
+}
+.side-bar .button {
+    width: 50px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: 2px;
+    transition: all 1s;
+}
+.table-container {
+    width: calc(100%-52px)%;
+}
