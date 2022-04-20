@@ -21,7 +21,7 @@
 .side-bar.open {
     width: 50%;
 }
-.side-bar .button {
+.side-bar .side-bar-item {
     width: 4em;
     margin-top: 0.1em;
     margin-bottom: 0.1em;
@@ -29,7 +29,11 @@
     margin-right: 0.5em;
     transition: all 1s;
 }
-.side-bar .checkbox {
+#hide-rows-checkbox ~ label::before {
+    content: '\f06e';
+}
+#hide-rows-checkbox ~ label::before {
+    content: '\f070';
 }
 .table-container {
     width: calc(100%-62px)%;
