@@ -21,7 +21,8 @@ app = DashProxy(__name__, transforms=[MultiplexerTransform()],
 layout = html.Div(
     [Keyboard(id='keyboard'),
      # *[dcc.Dropdown(options=df[c].unique(), multi=True) for c in df.columns],
-     get_table_from_dataframe(app, df, id='table', table_kwargs={'editable': True}),
+     get_table_from_dataframe(app, df, index_col=['Rows'], id='table',
+                              table_kwargs={'editable': True}),
      html.Label(id='txt')]
 )
 

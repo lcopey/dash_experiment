@@ -28,7 +28,7 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
         synchronize_tooltip: function(columns) {
             var result = new Object();
             for (const item of columns) {
-                result[item['id']] = {'value': item['name'], 'use_with': 'both'};
+                result[item['id']] = {'value': item['name'], 'use_with': 'header'};
             }
             return result
         },
