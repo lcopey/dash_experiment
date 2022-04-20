@@ -15,7 +15,8 @@ df.index.name = 'Rows'
 df.reset_index(inplace=True)
 
 # app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-app = DashProxy(__name__, transforms=[MultiplexerTransform()], external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = DashProxy(__name__, transforms=[MultiplexerTransform()],
+                external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 layout = html.Div(
     [Keyboard(id='keyboard'),

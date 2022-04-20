@@ -30,7 +30,6 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
             for (const item of columns) {
                 result[item['id']] = {'value': item['name'], 'use_with': 'both'};
             }
-            console.log(result);
             return result
         },
         open_sidebar:
