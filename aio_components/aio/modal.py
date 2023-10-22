@@ -5,8 +5,7 @@ from .base import BaseAIOId
 
 
 class BaseModalIds(BaseAIOId):
-    def window(self):
-        return self('window')
+    window = 'window'
 
 
 class BaseModalAIO(html.Div):
@@ -25,16 +24,16 @@ class BaseModalAIO(html.Div):
                 dbc.ModalBody(body),
                 dbc.ModalFooter(close_button),
             ],
-            id=self.ids.window(),
+            id=self.ids.window,
             is_open=is_open,
             size=size
         )
 
         clientside_callback(
             ClientsideFunction(namespace='modal', function_name='open'),
-            Output(self.ids.window(), 'is_open'),
+            Output(self.ids.window, 'is_open'),
             Input(trigger, 'n_clicks'),
-            State(self.ids.window(), 'is_open')
+            State(self.ids.window, 'is_open')
         )
 
         super().__init__(modal)
