@@ -1,21 +1,27 @@
-from dash import html, clientside_callback, ClientsideFunction, Output, Input, State
+from typing import Any, Literal
+
 import dash_bootstrap_components as dbc
-from typing import Literal, Any
-from .base import BaseAIOId
+from dash import (ClientsideFunction, Input, Output, State,
+                  clientside_callback, html)
+
+from .base import AutoName, BaseAIOId
 
 
 class BaseModalIds(BaseAIOId):
-    window = 'window'
+    window = AutoName()
 
 
 class BaseModalAIO(html.Div):
-    def __init__(self, aio_id: str,
-                 trigger: dbc.Button,
-                 header: str,
-                 close_button: dbc.Button,
-                 body: Any = '',
-                 is_open: bool = False,
-                 size: Literal['sm', 'lg', 'xl'] = 'sm'):
+    def __init__(
+        self,
+        aio_id: str,
+        trigger: dbc.Button,
+        header: str,
+        close_button: dbc.Button,
+        body: Any = "",
+        is_open: bool = False,
+        size: Literal["sm", "lg", "xl"] = "sm",
+    ):
         self.ids = BaseModalIds(aio_id)
 
         modal = dbc.Modal(
@@ -26,14 +32,14 @@ class BaseModalAIO(html.Div):
             ],
             id=self.ids.window,
             is_open=is_open,
-            size=size
+            size=size,
         )
 
         clientside_callback(
-            ClientsideFunction(namespace='modal', function_name='open'),
-            Output(self.ids.window, 'is_open'),
-            Input(trigger, 'n_clicks'),
-            State(self.ids.window, 'is_open')
+            ClientsideFunction(namespace="modal", function_name="open"),
+            Output(self.ids.window, "is_open"),
+            Input(trigger, "n_clicks"),
+            State(self.ids.window, "is_open"),
         )
 
         super().__init__(modal)
