@@ -24,7 +24,7 @@ def _is_callable(value: Any) -> bool:
     return isinstance(value, Callable)
 
 
-def _is_valid_class_attribute(key: str, value: Any):
+def _is_valid_id_attribute(key: str, value: Any):
     return not _is_dunder(key) and not _is_private(key) and not _is_callable(value)
 
 
@@ -42,7 +42,7 @@ class BaseMetaAIOId(type):
             {
                 key: value
                 for key, value in namespace.items()
-                if _is_valid_class_attribute(key, value)
+                if _is_valid_id_attribute(key, value)
             }
         )
         namespace["_ids"] = _ids
