@@ -1,0 +1,20 @@
+on_click.0:
+  args:
+  - null
+  kwargs: {}
+  result: null
+on_click.1:
+  args:
+  - 1
+  kwargs: {}
+  result: 1
+on_click.2:
+  args:
+  - 2
+  kwargs: {}
+  result: 2
+on_click.3:
+  args:
+  - 3
+  kwargs: {}
+  result: 3

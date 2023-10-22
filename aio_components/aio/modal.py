@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 from dash import (ClientsideFunction, Input, Output, State,
                   clientside_callback, html)
 
-from .base import AutoName, BaseAIOId
+from .ids import AutoName, BaseAIOId
 
 
 class BaseModalIds(BaseAIOId):
