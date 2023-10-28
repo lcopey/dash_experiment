@@ -1,0 +1,30 @@
+.custom-badge {
+    display: inline-block;
+	border: var(--bs-border-width) solid var(--bs-border-color);
+	border-radius: calc(4 * var(--bs-border-radius));
+	background-color: var(--bs-primary);
+	color: var(--bs-light);
+	padding-left: calc(var(--bs-border-radius) * 2);
+	padding-right: calc(var(--bs-border-radius) * 2);
+	padding-top: calc(var(--bs-border-radius) / 2);
+	padding-bottom: calc(var(--bs-border-radius) / 2);
+	margin: var(--bs-border-radius);
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.custom-badge > button {
+    color: var(--bs-light);
+    margin: var(--bs-border-radius);
+    background-color: var(--bs-primary);
+    border: 0px solid;
+    border-radius: var(--bs-border-radius);
+}
+
+.custom-badge > button:hover {
+    background-color: var(--bs-link-hover-color);
+}
+
+.custom-badge:hover {
+	color: var(--bs-light);
+	background-color: var(--bs-link-hover-color);
+	border-color: var(--bs-link-hover-color);
+}
