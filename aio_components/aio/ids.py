@@ -1,7 +1,7 @@
 from typing import Any, Callable
 
 
-class AutoName(str):
+class auto(str):
     """Class to automatically name an attribute."""
 
     pass
@@ -57,7 +57,7 @@ class BaseAIOId(metaclass=BaseMetaAIOId):
     def __init__(self, aio_id: str):
         self.aio_id = aio_id
         for key, value in self._ids.items():
-            if isinstance(value, AutoName):
+            if isinstance(value, auto):
                 value = key
             setattr(self, key, self.compose_ids(value))
 

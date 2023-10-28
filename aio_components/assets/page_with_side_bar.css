@@ -1,0 +1,42 @@
+.box {
+    box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 15px;
+}
+
+.side-bar {
+   position: absolute;
+   top: 2rem;
+   left: 0
+   boxRadius: 2px;
+   padding: 2rem;
+   height: calc(100% - 8rem);
+   transition: all 0.5s ease;
+}
+
+.side-bar-closed {
+   position: absolute;
+   top: 2rem;
+   left: 0
+   boxRadius: 2px;
+   padding: 0rem;
+   height: calc(100% - 8rem);
+   transition: all 0.5s ease;
+}
+
+.side-bar-content {
+    transition: all 0.5s ease;
+    visibility: visible;
+    opacity: 1;
+}
+.side-bar-closed .side-bar-content {
+    transition: all 0.5s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.main-page {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    padding: 2rem;
+    transition: all 0.5s ease;
+}
