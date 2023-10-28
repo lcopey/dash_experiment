@@ -4,32 +4,27 @@ from dash import Dash, Input, Output, State, clientside_callback, dcc, html
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 badge_store = dcc.Store(id="badge_store", data=[])
-badge_display = html.Div(
-    id="badge_display",
-    # children=html.Div(['Test', html.Button('x')], className='custom-badge')
-)
-dummy_output = html.Div(id="dummy")
+badge_display = html.Div(id="badge_display")
 input_component = dcc.Input(id="input")
 add_button = dbc.Button(id="validate", children="Add")
-test_div = html.Div(id="test")
+
+test_display = html.Div(id="test_display")
 
 app.layout = html.Div(
-    [input_component, add_button, badge_store, badge_display, dummy_output, test_div]
+    [input_component, add_button, badge_store, badge_display, test_display]
 )
 
 clientside_callback(
     """
     function(n_clicks, value, current) {
         if (n_clicks) {
-            const new_div = `<div class='custom-badge'>${value}<button>x</button></div>`;
             if (current) {
-                return [...current, new_div];
+                return [...current, value];
             } else {
-                return [new_div];
+                return [value];
             }
-        } else {
-            return window.dash_clientside.no_update;
         }
+        return window.dash_clientside.no_update;
     }
     """,
     Output("badge_store", "data"),
@@ -39,25 +34,32 @@ clientside_callback(
 )
 
 clientside_callback(
-    """
-    function(data) {
-        let inner_html = data.join('');
-        let badge_display = document.getElementById('badge_display');
-        badge_display.innerHTML = inner_html;
-        return window.dash_clientside.no_update
-    }""",
-    Output("dummy", "children"),
+    f"""
+    function(items) {{
+        if (items) {{
+            const children = items.map(
+                (item) => {{
+                    const child = {html.Div(children='', className='custom-badge').to_plotly_json()};
+                    child.props.children = item;
+                    return child;
+                }}
+            );
+            return children;
+        }} else {{
+            return window.dash_clientside.no_update;
+        }}
+    }}
+    """,
+    Output("badge_display", "children"),
     Input("badge_store", "data"),
 )
 
 clientside_callback(
-    """
-    function(data) {
-        console.log(data);
-        return data;
+    """function(children) {
+        return children;
     }
     """,
-    Output("test", "children"),
+    Output("test_display", "children"),
     Input("badge_display", "children"),
 )
 
