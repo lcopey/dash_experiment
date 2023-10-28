@@ -4,7 +4,7 @@ from dash import Input, Output, State, clientside_callback, dcc, html
 from .ids import BaseAIOId, auto
 
 
-class PageIds(BaseAIOId):
+class PageWithSideBarIds(BaseAIOId):
     side_bar = auto()
     main_page = auto()
     close_button = auto()
@@ -15,11 +15,18 @@ class PageWithSideBar(html.Div):
     def __init__(
         self, side_bar_children, main_page_children, aio_id: str, side_bar_width: str
     ):
-        self.ids = PageIds(aio_id)
+        self.ids = PageWithSideBarIds(aio_id)
         close_button = dbc.Button(
-            children="\u2630",
             id=self.ids.close_button,
-            style={"position": "absolute", "top": "0", "right": "0"},
+            className="close-button",
+            style={
+                "position": "absolute",
+                "top": "0rem",
+                "right": "0rem",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "color": "var(--bs-primary)",
+            },
         )
         side_bar = html.Div(
             id=self.ids.side_bar,
@@ -44,9 +51,10 @@ class PageWithSideBar(html.Div):
         clientside_callback(
             f"""function(is_open, side_bar_style, main_page_style) {{
                 const side_bar_width = is_open ? '2rem' : '{side_bar_width}';
+                const side_bar_left = is_open ? 'calc(-{side_bar_width} + 2rem)' : '0px';
                 const main_page_width = `calc(100% - 4rem - ${{side_bar_width}})`;
                 const output = [
-                {{ ...side_bar_style, width: side_bar_width }}, 
+                {{ ...side_bar_style, left: side_bar_left }}, 
                 is_open ? 'box side-bar-closed' : 'box side-bar',
                 {{ ...main_page_style, width: main_page_width }}
                 ];

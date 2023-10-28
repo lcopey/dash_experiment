@@ -5,18 +5,23 @@
 .side-bar {
    position: absolute;
    top: 2rem;
-   left: 0
-   boxRadius: 2px;
    padding: 2rem;
+   padding-top: 3rem;
    height: calc(100% - 8rem);
    transition: all 0.5s ease;
+}
+
+.side-bar .close-button::after {
+    content: "⨯";
+}
+
+.side-bar-closed .close-button::after {
+    content: "☰";
 }
 
 .side-bar-closed {
    position: absolute;
    top: 2rem;
-   left: 0
-   boxRadius: 2px;
    padding: 0rem;
    height: calc(100% - 8rem);
    transition: all 0.5s ease;
