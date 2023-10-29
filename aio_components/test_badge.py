@@ -1,6 +1,7 @@
 import dash_bootstrap_components as dbc
 from aio.badge_display import BadgeDisplay
-from dash import Dash, Input, Output, State, clientside_callback, dcc, html
+from dash import (ALL, MATCH, Dash, Input, Output, State, clientside_callback,
+                  dcc, html)
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -31,14 +32,15 @@ clientside_callback(
     State(badge_display.ids.store, "data"),
 )
 
-clientside_callback(
-    """function(children) {
-        return children;
-    }
-    """,
-    Output("test_display", "children"),
-    Input(badge_display.ids.display, "children"),
-)
+# clientside_callback(
+#     """function(children) {
+#         return children;
+#     }
+#     """,
+#     Output("test_display", "children"),
+#     Input(badge_display.ids.display, "children"),
+# )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
