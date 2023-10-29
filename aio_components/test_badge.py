@@ -15,8 +15,8 @@ app.layout = html.Div([input_component, add_button, badge_display, test_display]
 
 clientside_callback(
     """
-    function(n_clicks, value, current) {
-        if (n_clicks) {
+    function(n_clicks, n_submit, value, current) {
+        if (n_clicks || n_submit) {
             if (current) {
                 return [...current, value];
             } else {
@@ -28,6 +28,7 @@ clientside_callback(
     """,
     Output(badge_display.ids.store, "data"),
     Input("validate", "n_clicks"),
+    Input("input", "n_submit"),
     State("input", "value"),
     State(badge_display.ids.store, "data"),
 )

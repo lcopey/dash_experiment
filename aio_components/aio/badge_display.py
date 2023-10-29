@@ -10,7 +10,9 @@ class BadgeIds(BaseAIOId):
 
 
 class BadgeDisplay(html.Div):
-    def __init__(self, aio_id: str, child_class=html.Div, removable: bool = True, **child_kwargs):
+    def __init__(
+        self, aio_id: str, child_class=html.Div, removable: bool = True, **child_kwargs
+    ):
         self.ids = BadgeIds(aio_id)
 
         display = html.Div(id=self.ids.display)
