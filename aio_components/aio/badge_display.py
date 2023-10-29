@@ -10,7 +10,7 @@ class BadgeIds(BaseAIOId):
 
 
 class BadgeDisplay(html.Div):
-    def __init__(self, aio_id: str, child_class=html.Div, **child_kwargs):
+    def __init__(self, aio_id: str, child_class=html.Div, removable: bool = True, **child_kwargs):
         self.ids = BadgeIds(aio_id)
 
         display = html.Div(id=self.ids.display)
@@ -39,24 +39,25 @@ class BadgeDisplay(html.Div):
             Input(self.ids.store, "data"),
         )
 
-        clientside_callback(
-            """
-            function(n_click, childs, data) {
-                if ( n_click.some(t => t) ) {
-                    const triggered = dash_clientside.callback_context.triggered.map(
-                    t => JSON.parse(
-                            t['prop_id'].split('.')[0]
-                        )['index']
-                    )[0]; 
-                    return data.filter(t => t !== childs[triggered]);
-                } else {
-                    return window.dash_clientside.no_update
+        if removable:
+            clientside_callback(
+                """
+                function(n_click, childs, data) {
+                    if ( n_click.some(t => t) ) {
+                        const triggered = dash_clientside.callback_context.triggered.map(
+                        t => JSON.parse(
+                                t['prop_id'].split('.')[0]
+                            )['index']
+                        )[0]; 
+                        return data.filter(t => t !== childs[triggered]);
+                    } else {
+                        return window.dash_clientside.no_update
+                    }
                 }
-            }
-            """,
-            Output(self.ids.store, "data", allow_duplicate=True),
-            Input({"type": self.ids.child, "index": ALL}, "n_clicks"),
-            State({"type": self.ids.child, "index": ALL}, "children"),
-            State(self.ids.store, "data"),
-            prevent_initial_call=True,
-        )
+                """,
+                Output(self.ids.store, "data", allow_duplicate=True),
+                Input({"type": self.ids.child, "index": ALL}, "n_clicks"),
+                State({"type": self.ids.child, "index": ALL}, "children"),
+                State(self.ids.store, "data"),
+                prevent_initial_call=True,
+            )
