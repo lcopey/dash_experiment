@@ -1,10 +1,10 @@
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, clientside_callback, dcc, html
 
-from .ids import BaseAIOId, auto
+from .ids import BaseId, auto
 
 
-class PageWithSideBarIds(BaseAIOId):
+class PageWithSideBarIds(BaseId):
     side_bar = auto()
     main_page = auto()
     close_button = auto()

@@ -28,7 +28,7 @@ def _is_valid_id_attribute(key: str, value: Any):
     return not _is_dunder(key) and not _is_private(key) and not _is_callable(value)
 
 
-class BaseMetaAIOId(type):
+class BaseMetaId(type):
     def __new__(
         cls, cls_name: str, bases: tuple[type[Any], ...], namespace: dict[str, Any]
     ):
@@ -51,7 +51,7 @@ class BaseMetaAIOId(type):
         return x
 
 
-class BaseAIOId(metaclass=BaseMetaAIOId):
+class BaseId(metaclass=BaseMetaId):
     _ids: dict[str, Any]
 
     def __init__(self, aio_id: str):

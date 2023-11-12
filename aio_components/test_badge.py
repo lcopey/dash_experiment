@@ -5,7 +5,7 @@ from dash import (ALL, MATCH, Dash, Input, Output, State, clientside_callback,
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-badge_display = BadgeDisplay(aio_id="display", className='pills')
+badge_display = BadgeDisplay(aio_id="display", className="pills")
 input_component = dcc.Input(id="input")
 add_button = dbc.Button(id="validate", children="Add")
 

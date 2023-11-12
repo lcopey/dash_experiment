@@ -1,9 +1,10 @@
 from dash import ALL, Input, Output, State, clientside_callback, dcc, html
 from dash_iconify import DashIconify
-from .ids import BaseAIOId, auto
+
+from .ids import BaseId, auto
 
 
-class BadgeIds(BaseAIOId):
+class BadgeIds(BaseId):
     display = auto()
     store = auto()
     child = auto()
@@ -24,18 +25,19 @@ def _walk(json_component):
 
 
 def _to_json(component):
-    if hasattr(component, 'to_plotly_json'):
+    if hasattr(component, "to_plotly_json"):
         return _walk(component.to_plotly_json())
     return component
 
 
 class BadgeDisplay(html.Div):
     def __init__(
-            self, aio_id: str,
-            child_class=html.Div,
-            className: str = 'pills',
-            removable: bool = True,
-            **child_kwargs
+        self,
+        aio_id: str,
+        child_class=html.Div,
+        className: str = "pills",
+        removable: bool = True,
+        **child_kwargs,
     ):
         self.ids = BadgeIds(aio_id)
 
@@ -45,13 +47,11 @@ class BadgeDisplay(html.Div):
 
         parent_kwargs = {}
         if className:
-            parent_kwargs['className'] = className
-        inner_components = [child_class(children='', **child_kwargs)]
+            parent_kwargs["className"] = className
+        inner_components = [child_class(children="", **child_kwargs)]
         if removable:
             inner_components.append(
-                html.Button(
-                    DashIconify(icon='carbon:close-filled')
-                )
+                html.Button(DashIconify(icon="carbon:close-filled"))
             )
         child_template = _to_json(html.Div(children=inner_components, **parent_kwargs))
 
@@ -103,8 +103,14 @@ class BadgeDisplay(html.Div):
                 }
                 """,
                 Output(self.ids.store, "data", allow_duplicate=True),
-                Input({"type": self.ids.child, 'subtype': 'close', "index": ALL}, "n_clicks"),
-                State({"type": self.ids.child, 'subtype': 'badge', "index": ALL}, "children"),
+                Input(
+                    {"type": self.ids.child, "subtype": "close", "index": ALL},
+                    "n_clicks",
+                ),
+                State(
+                    {"type": self.ids.child, "subtype": "badge", "index": ALL},
+                    "children",
+                ),
                 State(self.ids.store, "data"),
                 prevent_initial_call=True,
             )
